@@ -6,7 +6,7 @@ message:
     # and replacing the number at the end with the line number.
     #line2: ''
     #line3: ''
-    #line4: ''
+    #line4: '' 
     #line5: ''
 console_command: 
     enabled: true

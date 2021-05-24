@@ -26,7 +26,7 @@ public class JoinListener implements Listener {
 			for (int count = 1; count > 0; count++) {
 				String messageData = config.getString("message.line" + count);
 				if (messageData == null) {
-					break;
+					break; 
 				}
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
 			}
