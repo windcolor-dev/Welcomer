@@ -23,7 +23,7 @@ public class JoinListener implements Listener {
 	public void on(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (config.getBoolean("message.enabled")) {
-			for (int count=1; count>0; count++) {
+			for (int count = 1; count > 0; count++) {
 				String messageData = config.getString("message.line" + count);
 				if (messageData == null) {
 					break;
@@ -31,7 +31,18 @@ public class JoinListener implements Listener {
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
 			}
 		}
-
+		if (config.getBoolean("console_command")) {
+			for (int count = 1; count > 0; count++) {
+				String cmdData = config.getString("console_command.cmd" + count);
+				if (cmdData == null) {
+					break;
+				}
+				if (cmdData.contains("PLAYER")) {
+					cmdData = cmdData.replace("PLAYER", "");
+				}
+				plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), cmdData);
+			}
+		}
 	}
 
 }

@@ -6,7 +6,7 @@
 
 	<groupId>com.windpvp</groupId>
 	<artifactId>welcomer</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Welcomer</name>
 
 	<build>
