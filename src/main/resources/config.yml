@@ -8,17 +8,16 @@ message:
     #line3: ''
     #line4: '' 
     #line5: ''
-console_command: 
+console_command:
     enabled: true
     # PLAYER will be replaced with the player's name
-    # This is an example of sending a title to a player.that lasts for 90 ticks
+    # This is an example of sending a title to a player.that lasts for 3000 ticks
     # and fades out in 30 ticks
-    cmd1: 'title PLAYER title [{"text":"This is a console command from welcomer!","color":"gold"}
-    cmd2: 'title PLAYER times 0 90 30'
+    cmd1: 'title PLAYER title [{"text":"Title by Welcomer","color":"blue"}]'
     # Remove the # from the below cmds to make the plugin use them.
     # You can also add unlimited lines by copying the format below
     # and replacing the number at the end with the line number.
+    #cmd2: ''
     #cmd3: ''
     #cmd4: ''
-    #cmd5: '
-  
+    #cmd5:  
