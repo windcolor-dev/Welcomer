@@ -1,6 +1,5 @@
 package com.windpvp.welcomer;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,10 +17,15 @@ public class JoinListener implements Listener {
 	private String cmdData;
 	private String replacedCmdData;
 
+	private long delayMsg;
+	private long delayCmd;
+
 	public JoinListener(JavaPlugin plugin) {
 		this.plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-		config = plugin.getConfig(); 
+		config = plugin.getConfig();
+		delayMsg = config.getLong("message.delay");
+		delayCmd = config.getLong("console_command.delay");
 	}
 
 	@EventHandler
@@ -33,15 +37,22 @@ public class JoinListener implements Listener {
 				if (messageData == null) {
 					break;
 				}
+				
+				if (delayMsg == 0) {
+					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), replacedCmdData);
+					return;
+				}
+				
 				new BukkitRunnable() {
 
 					@Override
 					public void run() {
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
 					}
-				}.runTaskLater(plugin, 10);
+				}.runTaskLater(plugin, delayMsg);
 			}
 		}
+
 		if (config.getBoolean("console_command.enabled")) {
 			for (int count = 1; count > 0; count++) {
 				cmdData = config.getString("console_command.cmd" + count);
@@ -52,14 +63,19 @@ public class JoinListener implements Listener {
 					replacedCmdData = cmdData.replace("PLAYER", player.getDisplayName());
 				}
 
+				if (delayCmd == 0) {
+					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), replacedCmdData);
+					return;
+				}
+
 				new BukkitRunnable() {
 
 					@Override
 					public void run() {
-						Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), replacedCmdData);
+						plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), replacedCmdData);
 					}
-					
-				}.runTaskLater(plugin, 10);
+
+				}.runTaskLater(plugin, delayCmd);
 			}
 		}
 	}
