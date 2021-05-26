@@ -21,7 +21,7 @@ public class JoinListener implements Listener {
 	public JoinListener(JavaPlugin plugin) {
 		this.plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-		config = plugin.getConfig();
+		config = plugin.getConfig(); 
 	}
 
 	@EventHandler
