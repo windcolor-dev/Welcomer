@@ -14,11 +14,14 @@ public class JoinListener implements Listener {
 
 	private JavaPlugin plugin;
 	private FileConfiguration config;
+	
+	private String msgData;
 	private String cmdData;
 	private String replacedCmdData;
-
+	
 	private long delayMsg;
 	private long delayCmd;
+
 
 	public JoinListener(JavaPlugin plugin) {
 		this.plugin = plugin;
@@ -26,20 +29,22 @@ public class JoinListener implements Listener {
 		config = plugin.getConfig();
 		delayMsg = config.getLong("message.delay");
 		delayCmd = config.getLong("console_command.delay");
+
 	}
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		
 		if (config.getBoolean("message.enabled")) {
 			for (int count = 1; count > 0; count++) {
-				String messageData = config.getString("message.line" + count);
-				if (messageData == null) {
+				msgData = config.getString("message.line" + count);
+				if (msgData == null) {
 					break;
 				}
 				
 				if (delayMsg == 0) {
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', msgData));
 					return; 
 				}
 				
@@ -47,7 +52,7 @@ public class JoinListener implements Listener {
 
 					@Override
 					public void run() {
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', msgData));
 					}
 				}.runTaskLater(plugin, delayMsg);
 			}
