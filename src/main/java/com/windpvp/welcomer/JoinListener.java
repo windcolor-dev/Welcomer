@@ -40,7 +40,7 @@ public class JoinListener implements Listener {
 				
 				if (delayMsg == 0) {
 					player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
-					return;
+					return; 
 				}
 				
 				new BukkitRunnable() {
