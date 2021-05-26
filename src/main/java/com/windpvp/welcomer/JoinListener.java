@@ -39,7 +39,7 @@ public class JoinListener implements Listener {
 				}
 				
 				if (delayMsg == 0) {
-					plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), replacedCmdData);
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', messageData));
 					return;
 				}
 				
