@@ -14,14 +14,13 @@ public class JoinListener implements Listener {
 
 	private JavaPlugin plugin;
 	private FileConfiguration config;
-	
+
 	private String msgData;
 	private String cmdData;
 	private String replacedCmdData;
-	
+
 	private long delayMsg;
 	private long delayCmd;
-
 
 	public JoinListener(JavaPlugin plugin) {
 		this.plugin = plugin;
@@ -35,19 +34,19 @@ public class JoinListener implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		
+
 		if (config.getBoolean("message.enabled")) {
 			for (int count = 1; count > 0; count++) {
 				msgData = config.getString("message.line" + count);
 				if (msgData == null) {
 					break;
 				}
-				
+
 				if (delayMsg == 0) {
 					player.sendMessage(ChatColor.translateAlternateColorCodes('&', msgData));
-					return; 
+					continue;
 				}
-				
+
 				new BukkitRunnable() {
 
 					@Override
